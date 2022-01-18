@@ -1,0 +1,415 @@
+# Git Cheat Sheet
+
+## Configuration
+
+Set the name that will be attached to your commits and tags
+
+~~~ bash
+git config --global user.name "Your Name"
+~~~
+
+Set the e-mail address that will be attached to your commits and tags
+
+~~~ bash
+git config --global user.email "you@example.com"
+~~~
+
+Enable some colorization of Git output
+
+~~~ bash
+git config --global color.ui auto
+~~~
+
+Show configuration
+
+~~~ bash
+git config --global --list
+git config -global -l
+~~~
+
+## Create
+
+Clone an existing repository
+
+~~~ bash
+git clone ssh://user@domain.com/repo.git
+~~~
+
+Create a new local repository.
+
+If [project name] is provided, Git will create a new directory named [project name] and will initialize a repository inside it. If [project name] is not provided, then a new repository is initialized in current directory.
+
+~~~ bash
+git init [project name]
+~~~
+
+## Ignoring Files
+
+.gitignore Files allows to ignore files. In this example all files in **logs** directory (excluding the **.gitkeep** file), whole tmp directory and all files ***.swp**. Described file ignoring will work for the directory (and child directories) where **.gitignore** file is placed.
+
+~~~ bash
+cat .gitignore
+/logs/*
+!logs/.gitkeep
+/temp
+*.swp
+~~~
+
+## Local Changes
+
+See the status of your work. New, staged, modified files. Current branch.
+
+~~~ bash
+git status
+~~~
+
+Show changes between **working directory** and **staging area**.
+
+~~~ bash
+git diff [file]
+~~~
+
+Show changes between **staging area** and **index** (repository commited status).
+
+~~~ bash
+git diff --staged [file]
+~~~
+
+Add a file to the **staging** area. Use **.** instead of full file path, to add all changed files from current directory down into directory tree.
+
+~~~ bash
+git add [file]
+~~~
+
+Add some changes in file to the next commit
+
+~~~ bash
+git add -p file
+~~~
+
+Commit all local changes in tracked files
+
+~~~ bash
+git commit -a
+~~~
+
+Commit previously staged changes
+
+~~~ bash
+git commit
+~~~
+
+Commit previously staged changes with a message
+
+~~~ bash
+git commit -m "Message"
+~~~
+
+Change the last commit
+Don't amend published commits!
+
+~~~ bash
+git commit --amend
+~~~
+
+Put all your changes into **stash**.
+
+~~~ bash
+git stash
+~~~
+
+Apply stored **stash** content into **working directory**, and clear **stash**
+
+~~~ bash
+git stash pop
+~~~
+
+Clear **stash** without applying it to **working directory**.
+
+~~~ bash
+git stash drop
+~~~
+
+## Commit History
+
+List commit history of current branch. **-n count** limits list to last **n** commits.
+
+~~~ bash
+git log [-n count]
+~~~
+
+A overview with references labels and history graph. One commit per line.
+
+~~~ bash
+git log --oneline --graph -- decorate
+~~~
+
+List commits, that are present on current branch and not merged into **ref**. A **ref** can be e.g. a branch name or a tag name.
+
+~~~ bash
+git log ref..
+~~~
+
+List commit, that are present on **ref** and not merged into current branch.
+
+~~~ bash
+git log ..ref
+~~~
+
+List operations (like checkouts, commits etc.) made on local repository
+
+~~~ bash
+git reflog
+~~~
+
+Show changes over time for a specific file
+
+~~~ bash
+git log -p "file"
+~~~
+
+Whoe changed what and when in file
+
+~~~ bash
+git blame "file"
+~~~
+
+## Branches & Tags
+
+List all local branches in repository. With **-a**: show all branches (with remote).
+
+~~~ bash
+git branch [-a]
+~~~
+
+Switch **HEAD** branch
+
+~~~ bash
+git checkout "branch"
+~~~
+
+Create new branch based on your current **HEAD**
+
+~~~ bash
+git branch "new-branch"
+~~~
+
+Create a new tracking branch based on a remote branch
+
+~~~ bash
+git checkout --track "remote/branch"
+~~~
+
+Delete a local branch
+
+~~~ bash
+git branch -d "branch"
+~~~
+
+Mark the current commit with a tag
+
+~~~ bash
+git tag "tag-name"
+~~~
+
+## Update & Publish
+
+List all currently condfigured remotes
+
+~~~ bash
+git remote -v
+~~~
+
+Show information about a remote
+
+~~~ bash
+git remote show "remote"
+~~~
+
+Add new remote repository, name "remote"
+
+~~~ bash
+git remote add "shortname" "url"
+~~~
+
+Download all changes from **remote**, but don't integrate into **HEAD**
+
+~~~ bash
+git fetch [remote]
+~~~
+
+Remove remote refs, that were removed from **remote** repository
+
+~~~ bash
+git fetch --prune [remote]
+~~~
+
+Download changes and directly merge/integrate into **HEAD**
+
+~~~ bash
+git pull [remote] [branch]
+~~~
+
+Publish local changes on a remote
+
+~~~ bash
+git push [--tags] [remote]
+~~~
+
+Delete a branch on the remote
+
+~~~ bash
+git branch -dr "remote/branch"
+~~~
+
+Publish your tags
+
+~~~ bash
+git push --tags
+~~~
+
+## Merge & Rebase
+
+Join specified [from name] branch into your current branch (the one you are on currently).
+
+~~~ bash
+git merge [from name]
+~~~
+
+Rebase your current **HEAD** onto "branch"
+Don't rebase published commits!
+
+~~~ bash
+git rebase "branch"
+~~~
+
+Abort a rebase
+
+~~~ bash
+git rebase --abort
+~~~
+
+Continue a rebase after resolving conflicts
+
+~~~ bash
+git rebase --continue
+~~~
+
+Use your configured merge tool to solve conflicts
+
+~~~ bash
+git mergetool
+~~~
+
+Use your editor to manually solve conflits and (after resolving) mark file as resolved
+
+~~~ bash
+git add "resolved file"
+git rm "resolved file"
+~~~
+
+## Undo
+
+Switch current branch to the **target reference**, and leaves a difference as an uncommited changes. When --hard is used, all changes are discarded.
+
+~~~ bash
+git reset [--hard] [target reference]
+~~~
+
+Discard all local changes in your working directory
+
+~~~ bash
+git reset --hard HEAD
+~~~
+
+Discard local changes in a specific file
+
+~~~ bash
+git checkout HEAD "file"
+~~~
+
+Revert a commit (by producing a new commit with contrary changes)
+
+~~~ bash
+git revert [commit sha]
+~~~
+
+Reset your **HEAD** pointer to a previous commit...
+
+...and discard all changes since then
+
+~~~ bash
+git reset --hard [commit sha]
+~~~
+
+...and preserve all changes as unstaged changes
+
+~~~ bash
+git reset [commit sha]
+~~~
+
+...and preserve uncommitted local changes
+
+~~~ bash
+git reset --keep [commit sha]
+~~~
+
+## Commit Related Changes
+
+A commit should be a wrapper for related changes. For example, fixing two different bugs should produce two separate commits. Small commits make it easier for other developers to understand the changes and roll them back if something went wrong.
+
+With tools like the staging area and the ability to stage only parts of a file, Git makes it easy to create very granular commits.
+
+## Commit Often
+
+Committing often keeps your commits small and, again, helps you commit only related changes. Moreover, it allows you to share your code more frequently with others. That way itÄs easier for everyone to integrate changes regularly and avoid having merge conflicts. Having few large commits and sharing them rerely, in contrast, makes it hard to solve conflicts.
+
+## Do not Commit Halfe-Done Work
+
+You should only commit code when it's completed. This downt mean you have to complete a whole, large feature before committing. Quite the contryry: splti the feature's implementation into logical chunks and remember to commit early and often. But don't commit just to have something in the repository before leaving the office at the end of the day. If you're tempted to commit just because you need a clean working copy (to check out a branch, pull in changes, etc.) consider using Git's "stash" feature instead.
+
+## Test Code Before You Commit
+
+Resist the temptation to commit something that you "think" is completed. Test it throughly to make sure it really is completed and has no side effects (as far as one can tell). While commiting half-baked things in your local repository only requires you to forgive yourself, having your code tested is even more important when it comes to pusing/sharing your code with others.
+
+## Version Control Is Not A Backup System
+
+Having your files backed up on a remote server is a nice side effect of having a version control system. But you should not use your VCS like it was a backup system. WHen doing version control, you should pay attention to committing sematically (ree "related changes") - you shouldn't just cram in files.
+
+## Write Good Commit Messages
+
+Begin your message with a short summary of your changes (up to 50 characters as a guidline). Separete it from the following body by including a blank line. The body of your message should provide detailed answers to the following questions:
+
+- What was the motivation for the change?
+- How does it differ from the previous implementation?
+
+Use the imperative, present tense ("change", not "changed" or "changes") to be consistent with generated messages from commands like git merge.
+
+## Use Branches
+
+Branching is one of Git's most powerful features - and this is not by accident: quick and easy branching was a central requirement from day one. Branches are the perfect tool to help you avoiding mixing up different lines of development. You should use branches extensively in your development workflow: for new features, bug fixes, ideas, ...
+
+## Agree On A Workflow
+
+Git lets you pick from a lot of different workflows: long-running branches, topic branches, merge or rebase, git-flow, trunk-based-development, ...Which one you choose depends on a couple of factors: your project, your overall development and deployment workflows and (maybe most importantly) on your and your teammate's personal preferences. However you choose to work, just make shure to agree on common workflow that everyone follows.
+
+## Help & Documentation
+
+Get help on the command line
+
+~~~ bash
+git help "command"
+~~~
+
+## Free Online Resources
+
+<http://www.git-tower.com/learn>
+<http://rogerdudler.github.io/git-guide>
+<http://git-scm.org>
+
+## Sources
+
+<https://www.git-tower.com/blog/git-cheat-sheet/>
+<https://about.gitlab.com/images/press/git-cheat-sheet.pdf>
+
+<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js" charset="utf-8"></script><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js" charset="utf-8"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>

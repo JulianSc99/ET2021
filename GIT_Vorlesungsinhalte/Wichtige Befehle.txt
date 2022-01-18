@@ -1,5 +1,8 @@
 .gitignore https://github.com/github/gitignore/blob/main/TeX.gitignore
 
+git clone https://github.com/JulianSc99/ET2021.git
+git cd ET2021
+
 git add .
 git commit –m "Text"
 git pull

@@ -1,0 +1,49 @@
+<meta charset="utf-8">
+# Wissenschaftlich Arbeiten: Git Praxis
+
+## Die Kommandozeilenprogramm
+
+1. Öffne ein Kommandozeilenprogramm deiner Wahl z.B. Commandline (CMD) oder Powershell. Ich empfehle die powershell. Dafür gibt es verschiedene Wege:
+   1. Eingeben von cmd oder powershell in die Adressleiste des Explorers.
+   2. [Win] + [R] dann in das Ausführen-Fenster cmd oder powershell eingeben.
+2. Überprüfe mit dem Befehl "git" oder "git --version" ob Git auf dem Rechner installiert ist.
+3. Navigiere nun in einen Ordner deiner Wahl in dem du deinen Stammordner für alle Git Repositories anlegen willst. Beispielsweise euer Benutzerordner. Der Befehl dafür lautet: z.B. "cd d:\" Falls euer Benutzerlaufwerk als "d:\" angebunden ist.
+4. Lege nun einen Stammordner für alle Git Repositories an: "mkdir Git" und navigiere in diesen Ordner "cd Git".
+Anmerkung: Um zu sehen, welche Dateien und Ordner in einem Verzeichnis vorhanden sind kann man den befehl "dir" verwenden. Für die Navigation in den Überordner wird der Befehl "cd .." verwendet.
+
+## Konfiguration
+
+1. Konfiguriere Git mit deinem Benutzernamen und deiner E-Mail.
+   1. Identität
+      1. git config --global user.name "John Doe"
+      2. git config --global user.email johndoe@example.com
+   2. Editor
+      1. git config --global core.editor "code --wait" oder "C:\\Program Files\\Notepad++\\notepad++.exe" -multiInst -notabbar -nosession -noPlugin
+2. Verwende die Hilfe um den Befehl git add kennen zu lernen
+   1. git help <verb>
+   2. git <verb> --help
+   3. man git-<verb>
+   
+## Lokal Arbeiten
+
+Erstelle nun im Git Ordner ein lokales Repository mit dem Namen First und wechsel danach in das Verzeichnis.
+    git init First
+    cd First
+	
+1. Erstelle eine Textdatei im Repository und füge es zu Git hinzu (git add [filename]) und Commite die Änderung (git commit).
+2. Ändere den Inhalt der Textdatei und Commite die Änderung.
+3. Erstelle einen Ordner und versuche ihn hinzuzufügen und Commiten. Diskutiere dein Erkentnisse mit deinem Nachbarn.
+
+
+## Teamaufgabe
+1. Erstellt euch zu zweit jeweils ein Bare Repository (git init --bare) auf einem öffentlichen Laufwerk benennt es mit .git (Konvention) (P:\et\et2019\Git\Gruppenaufgabe).
+2. Klont beide das Repository in einem belibigen Ordner auf eurem PC.
+3. Arbeitet mit dem Repository, erstellt Dateien, Commits, verändert Dateien gleichzeitig und experimentiert wie euer Repository reagiert.
+
+
+
+
+
+
+
+<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js" charset="utf-8"></script><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js" charset="utf-8"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
