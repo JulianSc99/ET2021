@@ -1,0 +1,6 @@
+.gitignore https://github.com/github/gitignore/blob/main/TeX.gitignore
+
+git add .
+git commit –m "Text"
+git pull
+git push
